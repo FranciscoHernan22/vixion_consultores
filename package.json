@@ -11,7 +11,8 @@
   "dependencies": {
     "@astrojs/vercel": "^9.0.2",
     "astro": "^5.16.6",
-    "nodemailer": "^7.0.12"
+    "nodemailer": "^7.0.12",
+    "swiper": "^12.1.2"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^6.0.2",

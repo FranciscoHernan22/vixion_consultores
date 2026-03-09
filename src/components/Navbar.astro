@@ -1,91 +1,40 @@
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("menu-btn");
-  const menu = document.getElementById("menu");
-  const overlay = document.getElementById("overlay");
-  const closeBtn = document.getElementById("close-menu");
+<nav class="bg-[#101425]/90 backdrop-blur-md text-white py-4 px-8 
+            flex justify-between items-center 
+            shadow-lg sticky top-0 z-50 border-b border-white/10">
 
-  if (!btn || !menu || !overlay) return;
-
-  const toggleMenu = () => {
-    menu.classList.toggle("translate-x-full");
-    overlay.classList.toggle("hidden");
-    document.body.classList.toggle("overflow-hidden");
-  };
-
-  btn.addEventListener("click", toggleMenu);
-  overlay.addEventListener("click", toggleMenu);
-  closeBtn?.addEventListener("click", toggleMenu);
-
-  menu.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", toggleMenu);
-  });
-});
-</script>
-
-<!-- NAV -->
-<nav class="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-
-    <!-- Logo -->
-    <a href="#Inicio" class="text-2xl font-serif text-gray-800">
-      Renew <span class="font-light text-pink-600">Beauty Inc</span>
-    </a>
-
-    <!-- Botón móvil -->
-    <button
-      id="menu-btn"
-      class="md:hidden text-2xl text-gray-700"
-      aria-label="Abrir menú"
-    >
-      ☰
-    </button>
-
-    <!-- MENÚ DESKTOP -->
-    <ul class="hidden md:flex gap-10 text-sm uppercase tracking-widest text-gray-700">
-      <li><a href="#Botox" class="hover:text-pink-600">Botox</a></li>
-      <li><a href="#Ácido" class="hover:text-pink-600">Ácido Hialurónico</a></li>
-      <li><a href="#Hilos" class="hover:text-pink-600">Hilos Rusos</a></li>
-      <li><a href="#Nosotros" class="hover:text-pink-600">Nosotros</a></li>
-      <li><a href="#Contactanos" class="hover:text-pink-600">Contáctanos</a></li>
-    </ul>
-
+  <!-- Logo -->
+  <div class="flex flex-col leading-tight">
+    <span class="text-2xl font-bold tracking-wider text-white">
+      VIXION
+    </span>
+    <span class="uppercase tracking-[0.4em] text-xs text-blue-300">
+      CONSULTORES
+    </span>
   </div>
+
+  <!-- Links -->
+  <div class="space-x-8 hidden md:flex text-sm font-medium tracking-wide">
+    <a href="#servicios" class="hover:text-blue-300 transition duration-300">
+      Servicios
+    </a>
+    <a href="#beneficios" class="hover:text-blue-300 transition duration-300">
+      Beneficios
+    </a>
+    <a href="#nosotros" class="hover:text-blue-300 transition duration-300">
+      Nosotros
+    </a>
+    <a href="#contacto" class="hover:text-blue-300 transition duration-300">
+      Contacto
+    </a>
+  </div>
+
+  <!-- CTA Button -->
+  <a href="#contacto" 
+     class="bg-blue-400 text-[#101425] px-5 py-2.5 rounded-lg
+            font-semibold tracking-wide 
+            hover:bg-blue-300 hover:scale-105
+            transition-all duration-300 shadow-lg">
+    Agenda tu asesoría
+  </a>
+
 </nav>
-
-<!-- OVERLAY -->
-<div
-  id="overlay"
-  class="hidden fixed inset-0 bg-black/40 z-40 md:hidden">
-</div>
-
-<!-- MENÚ MÓVIL -->
-<ul
-  id="menu"
-  class="
-    fixed top-0 right-0 h-full w-64
-    bg-white z-50
-    flex flex-col items-center
-    pt-28 gap-8
-    text-sm uppercase tracking-widest text-gray-700
-    transform translate-x-full transition-transform duration-300
-    overflow-y-auto
-    md:hidden
-  "
->
-
-  <!-- BOTÓN CERRAR -->
-  <button
-    id="close-menu"
-    class="absolute top-6 right-6 text-2xl text-gray-600"
-    aria-label="Cerrar menú"
-  >
-    ✕
-  </button>
-
-  <li><a href="#Botox" class="hover:text-pink-600">Botox</a></li>
-  <li><a href="#Ácido" class="hover:text-pink-600">Ácido Hialurónico</a></li>
-  <li><a href="#Hilos" class="hover:text-pink-600">Hilos Rusos</a></li>
-  <li><a href="#Nosotros" class="hover:text-pink-600">Nosotros</a></li>
-  <li><a href="#Contactanos" class="hover:text-pink-600">Contáctanos</a></li>
-</ul>
