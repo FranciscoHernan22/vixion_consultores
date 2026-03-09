@@ -3,13 +3,22 @@
             shadow-lg sticky top-0 z-50 border-b border-white/10">
 
   <!-- Logo -->
-  <div class="flex flex-col leading-tight">
+<div class="flex items-center gap-3">
+ 
+
+  <img src="/Logo vixion2.png" alt="Logo" class="h-12 w-auto">
+ 
+
+      <div class="flex flex-col leading-tight">
+
     <span class="text-2xl font-bold tracking-wider text-white">
       VIXION
     </span>
     <span class="uppercase tracking-[0.4em] text-xs text-blue-300">
       CONSULTORES
     </span>
+     </div>
+
   </div>
 
   <!-- Links -->
@@ -29,12 +38,26 @@
   </div>
 
   <!-- CTA Button -->
-  <a href="#contacto" 
-     class="bg-blue-400 text-[#101425] px-5 py-2.5 rounded-lg
-            font-semibold tracking-wide 
-            hover:bg-blue-300 hover:scale-105
-            transition-all duration-300 shadow-lg">
-    Agenda tu asesoría
-  </a>
+<a href="#contacto" 
+   class="hidden md:inline-block bg-blue-400 text-[#101425] px-5 py-2.5 rounded-lg
+          font-semibold tracking-wide 
+          hover:bg-blue-300 hover:scale-105
+          transition-all duration-300 shadow-lg">
+  Agenda tu asesoría
+</a>
+
+ 
 
 </nav>
+
+<a href="#contacto"
+   class="fixed bottom-6 right-6 md:hidden
+          bg-blue-400 text-[#101425]
+          px-6 py-3 rounded-full
+          font-semibold text-sm
+          shadow-xl
+          hover:bg-blue-300
+          transition-all duration-300
+          z-50">
+  Agenda tu asesoría
+</a>
