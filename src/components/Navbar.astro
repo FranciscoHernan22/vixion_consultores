@@ -3,7 +3,7 @@
             shadow-lg sticky top-0 z-50 border-b border-white/10">
 
   <!-- Logo -->
-<div class="flex items-center gap-3">
+<a href="#hero" class="flex items-center gap-3">
  
 
   <img src="/Logo vixion2.png" alt="Logo" class="h-12 w-auto">
@@ -19,7 +19,7 @@
     </span>
      </div>
 
-  </div>
+  </a>
 
   <!-- Links -->
   <div class="space-x-8 hidden md:flex text-sm font-medium tracking-wide">
@@ -31,6 +31,9 @@
     </a>
     <a href="#nosotros" class="hover:text-blue-300 transition duration-300">
       Nosotros
+    </a>
+     <a href="#equipo" class="hover:text-blue-300 transition duration-300">
+      Equipo
     </a>
     <a href="#contacto" class="hover:text-blue-300 transition duration-300">
       Contacto
@@ -47,7 +50,9 @@
 </a>
 
  
-
+<button id="menu-btn" class="md:hidden text-2xl">
+☰
+</button>
 </nav>
 
 <a href="#contacto"
@@ -55,9 +60,61 @@
           bg-blue-400 text-[#101425]
           px-6 py-3 rounded-full
           font-semibold text-sm
-          shadow-xl
-          hover:bg-blue-300
+          shadow-xl hover:bg-blue-300
           transition-all duration-300
-          z-50">
+          z-60">
   Agenda tu asesoría
 </a>
+
+<div id="mobile-menu"
+     class="hidden fixed inset-0
+            bg-[#101425] text-white
+            flex-col items-center justify-center
+            space-y-8 text-xl font-medium
+            z-40">
+
+  <a href="#servicios" class="hover:text-blue-300 transition">Servicios</a>
+  <a href="#beneficios" class="hover:text-blue-300 transition">Beneficios</a>
+  <a href="#nosotros" class="hover:text-blue-300 transition">Nosotros</a>
+    <a href="#equipo" class="hover:text-blue-300 transition">Equipo</a>
+  <a href="#contacto" class="hover:text-blue-300 transition">Contacto</a>
+ 
+</div>
+
+<script>
+ 
+const btn = document.getElementById("menu-btn");
+const menu = document.getElementById("mobile-menu");
+const links = document.querySelectorAll("#mobile-menu a");
+
+if (btn && menu) {
+
+  btn.addEventListener("click", () => {
+
+    if(menu.classList.contains("hidden")){
+      menu.classList.remove("hidden");
+      menu.classList.add("flex");
+      btn.textContent = "✕";
+    } else {
+      menu.classList.remove("flex");
+      menu.classList.add("hidden");
+      btn.textContent = "☰";
+    }
+
+  });
+
+  // cerrar menú al hacer click en un link
+  links.forEach(link => {
+    link.addEventListener("click", () => {
+      menu.classList.remove("flex");
+      menu.classList.add("hidden");
+      btn.textContent = "☰";
+    });
+  });
+
+}
+</script>
+
+ 
+</script>
+
