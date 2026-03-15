@@ -135,6 +135,7 @@ o solicitar asesoría
 <!-- FORMULARIO -->
 <form id="contactForm" class="space-y-5">
 
+  <div> 
 <input 
 type="text"
 name="nombre"
@@ -142,14 +143,19 @@ required
 placeholder="Nombre completo"
 class="w-full bg-slate-800/80 border border-slate-700 rounded-lg px-4 py-3 text-white
 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+<p class="error" id="error-nombre"></p>
+</div>
 
+<div> 
 <input 
 type="text"
 name="empresa"
 placeholder="Empresa"
 class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white
 focus:outline-none focus:ring-2 focus:ring-blue-500">
+</div>
 
+<div> 
 <input 
 type="tel"
 name="telefono"
@@ -157,7 +163,10 @@ required
 placeholder="Teléfono"
 class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white
 focus:outline-none focus:ring-2 focus:ring-blue-500">
+<p class="error" id="error-telefono"></p>
+</div>
 
+<div>
 <textarea 
 name="mensaje"
 rows="3"
@@ -165,14 +174,41 @@ required
 placeholder="Describe brevemente tu situación contable o fiscal..."
 class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white
 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+<p class="error" id="error-mensaje"></p>
+</div>
 
 <button 
 type="submit"
-class="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-full font-semibold transition">
+class="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-full font-semibold transition flex items-center justify-center gap-2">
 
-Solicitar asesoría
+<span id="btnText">Solicitar asesoría</span>
+
+<span id="spinner" class="hidden animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"></span>
 
 </button>
+
+<div id="successMessage" 
+class="hidden flex items-center gap-3 bg-blue-500/10 border border-blue-500/30 
+text-blue-400 px-4 py-3 rounded-lg text-sm font-medium">
+
+<svg xmlns="http://www.w3.org/2000/svg"
+class="w-5 h-5 text-blue-400"
+fill="none"
+viewBox="0 0 24 24"
+stroke="currentColor">
+
+<path stroke-linecap="round"
+stroke-linejoin="round"
+stroke-width="2"
+d="M5 13l4 4L19 7"/>
+
+</svg>
+
+<span>
+Mensaje enviado correctamente. Nos pondremos en contacto contigo.
+</span>
+
+</div>
 
 </form>
 
@@ -187,36 +223,136 @@ Solicitar asesoría
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-  const form = document.getElementById("contactForm") as HTMLFormElement;
+const form = document.getElementById("contactForm");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+if (!(form instanceof HTMLFormElement)) return;
 
-    const formData = new FormData(form);
+const nombre = form.querySelector('[name="nombre"]') as HTMLInputElement;;
+const telefono = form.querySelector('[name="telefono"]') as HTMLInputElement;;
+const mensaje = form.querySelector('[name="mensaje"]') as HTMLInputElement;;
 
-    const data = {
-      nombre: formData.get("nombre"),
-      empresa: formData.get("empresa"),
-      telefono: formData.get("telefono"),
-      mensaje: formData.get("mensaje")
-    };
+const errorNombre = document.getElementById("error-nombre") as HTMLInputElement;;
+const errorTelefono = document.getElementById("error-telefono") as HTMLInputElement;;
+const errorMensaje = document.getElementById("error-mensaje") as HTMLInputElement;;
 
-    const res = await fetch("/api/contacto", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
 
-    if (res.ok) {
-      alert("Mensaje enviado correctamente");
-      form.reset();
-    } else {
-      alert("Error al enviar el mensaje");
-    }
+// VALIDAR NOMBRE
+function validarNombre(){
 
-  });
+if(nombre.value.trim().length < 3){
+
+errorNombre.textContent="Ingrese un nombre válido";
+nombre.classList.add("border-red-500","ring-red-500");
+
+return false;
+
+}
+
+errorNombre.textContent="";
+nombre.classList.remove("border-red-500","ring-red-500");
+
+return true;
+
+}
+
+
+// VALIDAR TELEFONO
+function validarTelefono(){
+
+const telefonoRegex=/^[0-9]{10,15}$/;
+
+if(!telefonoRegex.test(telefono.value.trim())){
+
+errorTelefono.textContent="Ingrese un teléfono válido";
+telefono.classList.add("border-red-500","ring-red-500");
+
+return false;
+
+}
+
+errorTelefono.textContent="";
+telefono.classList.remove("border-red-500","ring-red-500");
+
+return true;
+
+}
+
+
+// VALIDAR MENSAJE
+function validarMensaje(){
+
+if(mensaje.value.trim().length < 10){
+
+errorMensaje.textContent="Por favor describe brevemente tu situación para poder ayudarte.";
+mensaje.classList.add("border-red-500","ring-red-500");
+
+return false;
+
+}
+
+errorMensaje.textContent="";
+mensaje.classList.remove("border-red-500","ring-red-500");
+
+return true;
+
+}
+
+
+// VALIDACIÓN EN TIEMPO REAL
+ 
+
+
+// SUBMIT
+form.addEventListener("submit", async (e) => {
+
+e.preventDefault();
+
+const valid =
+validarNombre() &&
+validarTelefono() &&
+validarMensaje();
+
+if(!valid) return;
+
+const formData = new FormData(form);
+
+const data = {
+nombre:formData.get("nombre"),
+empresa:formData.get("empresa"),
+telefono:formData.get("telefono"),
+mensaje:formData.get("mensaje")
+};
+
+try{
+
+const res = await fetch("/api/contacto",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(data)
+});
+
+if(res.ok){
+
+const success=document.getElementById("successMessage");
+if(success) success.classList.remove("hidden");
+
+form.reset();
+
+}else{
+
+alert("Error al enviar el mensaje");
+
+}
+
+}catch{
+
+alert("Error de conexión");
+
+}
+
+});
 
 });
 </script>
