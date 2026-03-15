@@ -133,7 +133,7 @@ o solicitar asesoría
 
 
 <!-- FORMULARIO -->
-<form class="space-y-5">
+<form id="contactForm" class="space-y-5">
 
 <input 
 type="text"
@@ -182,3 +182,41 @@ Solicitar asesoría
 
   </div>
 </section>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const form = document.getElementById("contactForm") as HTMLFormElement;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    const data = {
+      nombre: formData.get("nombre"),
+      empresa: formData.get("empresa"),
+      telefono: formData.get("telefono"),
+      mensaje: formData.get("mensaje")
+    };
+
+    const res = await fetch("/api/contacto", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (res.ok) {
+      alert("Mensaje enviado correctamente");
+      form.reset();
+    } else {
+      alert("Error al enviar el mensaje");
+    }
+
+  });
+
+});
+</script>
