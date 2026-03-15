@@ -1,59 +1,131 @@
- <section  id="equipo" class="bg-[#101425] py-20">
-  <div class="max-w-7xl mx-auto px-6">
+<section id="equipo" class="bg-[#0B0F1C] py-28">
 
-    <h2 class="text-3xl font-bold text-white text-center mb-12">
-      Nuestro Equipo
-    </h2>
+<div class="max-w-7xl mx-auto px-8 lg:px-12">
 
-    <div class="relative">
+<h2 class="text-4xl md:text-5xl font-semibold text-[#cbd6ea] text-center tracking-wide mb-8">
+Nuestro Equipo
+</h2>
 
-      <!-- CONTENEDOR SCROLL -->
-      <div 
-        id="equipoScroll"
-        class="flex gap-8 overflow-x-auto scroll-smooth no-scrollbar"
-      >
-        {
-          Array.from({ length: 11 }).map((_, i) => (
-            <div class="min-w-[260px] flex-shrink-0">
-              <div class="h-[380px] rounded-2xl overflow-hidden shadow-xl">
-                <img                    
+<p class="text-[#97accb] text-center max-w-3xl mx-auto leading-relaxed mb-12">
+Profesionales especializados en contabilidad, fiscal y asesoría empresarial,
+comprometidos con el crecimiento y cumplimiento financiero de nuestros clientes.
+</p>
 
-                  src={`/equipo${(i % 11) + 1}.PNG`} 
-                  class="w-full h-full object-cover"
-                />
-              </div>
-              <div class="mt-4 text-center">
-                <h3 class="text-white font-semibold text-lg">
-                  Integrante {i + 1}
-                </h3>
-                <p class="text-blue-400 text-sm uppercase tracking-wider">
-                  Cargo Ejecutivo
-                </p>
-              </div>
-            </div>
-          ))
-        }
-      </div>
 
-      <!-- FLECHA IZQUIERDA -->
-      <button 
-        id="btnLeft"
-        class="absolute left-0 top-1/2 -translate-y-1/2 bg-[#101425]/80 text-white p-3 rounded-full shadow-lg z-10"
-      >
-        ←
-      </button>
 
-      <!-- FLECHA DERECHA -->
-      <button 
-        id="btnRight"
-        class="absolute right-0 top-1/2 -translate-y-1/2 bg-[#101425]/80 text-white p-3 rounded-full shadow-lg z-10"
-      >
-        →
-      </button>
+<!-- CEO DESTACADO -->
 
-    </div>
+<div class="flex justify-center mb-32">
 
-  </div>
+<div 
+onclick="openModal()"
+class="group cursor-pointer text-center max-w-md"
+>
+
+<div class="relative h-[440px] rounded-2xl overflow-hidden
+shadow-[0_20px_50px_rgba(0,0,0,0.5)]
+border border-[#21375b]">
+
+<img 
+src="/equipo1.PNG"
+class="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+/>
+
+<div class="absolute top-5 left-5 bg-[#21375b] text-[#cbd6ea] text-xs px-4 py-1 rounded-full tracking-wider">
+CEO
+</div>
+
+<div class="absolute inset-0 bg-[#101425]/90 flex flex-col justify-center items-center text-center px-8
+opacity-0 group-hover:opacity-100 transition duration-500">
+
+<h3 class="text-[#cbd6ea] text-2xl font-semibold mb-3">
+Esteban Ramírez
+</h3>
+
+<p class="text-[#97accb] uppercase text-sm tracking-wider mb-4">
+CEO / Contador Público
+</p>
+
+<p class="text-[#cbd6ea]/80 text-sm leading-relaxed">
+Contador Público con más de 10 años de experiencia en
+contabilidad, fiscal y asesoría empresarial.
+<br><br>
+Actualmente dirige su despacho contable y se desempeña
+como docente universitario en áreas de contabilidad,
+auditoría, impuestos y finanzas.
+</p>
+
+</div>
+
+</div>
+
+<h3 class="text-[#cbd6ea] text-2xl font-semibold mt-8 tracking-wide">
+Esteban Ramírez
+</h3>
+
+<p class="text-[#97accb] text-sm uppercase tracking-widest mt-2">
+CEO / Socio Fundador
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- GRID EQUIPO -->
+
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-10 gap-y-16">
+
+{
+Array.from({ length: 10 }).map((_, i) => (
+
+<div class="group text-center">
+
+<div class="relative h-[300px] rounded-xl overflow-hidden
+shadow-[0_10px_30px_rgba(0,0,0,0.4)]">
+
+<img
+src={`/equipo${i+2}.PNG`}
+class="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+/>
+
+<div class="absolute inset-0 bg-[#101425]/90 flex flex-col justify-center items-center text-center px-6
+opacity-0 group-hover:opacity-100 transition duration-500">
+
+<h3 class="text-[#cbd6ea] font-semibold mb-1">
+Integrante {i+2}
+</h3>
+
+<p class="text-[#97accb] text-xs uppercase tracking-wider mb-2">
+Consultor
+</p>
+
+<p class="text-[#cbd6ea]/70 text-xs leading-relaxed">
+Especialista en asesoría fiscal y contabilidad.
+</p>
+
+</div>
+
+</div>
+
+<h3 class="text-[#cbd6ea] font-semibold mt-5">
+Integrante {i+2}
+</h3>
+
+<p class="text-[#97accb] text-xs uppercase tracking-widest mt-1">
+Consultor
+</p>
+
+</div>
+
+))
+}
+
+</div>
+
+</div>
+
 </section>
 
 <style>
@@ -65,6 +137,20 @@
     scrollbar-width: none;
   }
 </style>
+
+<script is:inline>
+
+function openModal(){
+const modal = document.getElementById("modalCV");
+modal.classList.remove("opacity-0","pointer-events-none");
+}
+
+function closeModal(){
+const modal = document.getElementById("modalCV");
+modal.classList.add("opacity-0","pointer-events-none");
+}
+
+</script>
 
 <script is:inline>
   const container = document.getElementById("equipoScroll");
@@ -81,3 +167,66 @@
     });
   }
 </script>
+
+
+<div 
+id="modalCV"
+class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center
+opacity-0 pointer-events-none transition z-50"
+>
+
+<div class="bg-[#101425] text-white rounded-2xl w-[90%] max-w-4xl max-h-[90vh] overflow-y-auto p-10 relative">
+
+<button 
+onclick="closeModal()" 
+class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl"
+>
+✕
+</button>
+
+<div class="flex items-center gap-6 mb-10">
+
+<img src="/equipo1.PNG" class="w-28 h-28 rounded-full object-cover">
+
+<div>
+
+<h2 class="text-2xl font-bold">
+Esteban Ramírez
+</h2>
+
+<p class="text-blue-400 uppercase text-sm">
+CEO / Contador Público
+</p>
+
+<p class="text-gray-400 text-sm">
+Cabo San Lucas, Baja California Sur
+</p>
+
+</div>
+
+</div>
+
+<p class="text-[#cbd6ea]/80 leading-relaxed mb-6">
+Contador Público con más de 10 años de experiencia en contabilidad,
+fiscal y gestión financiera. Especialista en cumplimiento de
+obligaciones fiscales, elaboración de estados financieros
+y asesoría tributaria para empresas.
+</p>
+
+<p class="text-[#cbd6ea]/80 leading-relaxed mb-6">
+Cuenta con experiencia profesional en organizaciones como
+Rancho San Lucas, Thor Urbana y Solmar Hotel & Resorts.
+Actualmente dirige su despacho contable brindando asesoría
+fiscal y financiera a empresas.
+</p>
+
+<p class="text-[#cbd6ea]/80 leading-relaxed">
+Además, se desempeña como docente universitario en áreas
+de Impuestos, Auditoría, Finanzas, Contabilidad y
+Matemáticas Financieras en diversas instituciones de
+educación superior en Baja California Sur.
+</p>
+
+</div>
+
+</div>
